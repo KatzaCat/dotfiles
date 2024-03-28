@@ -1,14 +1,9 @@
 " Setting things
 
+
 set nocompatible		" Disables compatibility with vi
-set showmatch			" Show matching
-set ignorecase			" Turn off case censitivity
 set mouse=v			" Middle mouse ckick is paste
 set hlsearch			" Hilights the search resaults
-set incsearch           	" Incremental search
-set tabstop=4           	" Number of columns occupied by a tab
-set expandtab           	" Converts tabs to white space
-set shiftwidth=4        	" Width for autoindents
 set number			" Adds line numbers
 set mouse=a			" Lets you use mouse
 set clipboard=unnamedplus	" Sets copy/paste to system clipboard
@@ -28,6 +23,11 @@ Plug 'SirVer/ultisnips'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree'
 call plug#end()
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Nerdtree stuff
 autocmd VimEnter * NERDTree
